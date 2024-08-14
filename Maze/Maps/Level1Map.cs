@@ -18,6 +18,11 @@
             player.pos.x = 1;
             player.pos.y = 1;
             player.map = map;
+            funtion.temp.x = 0;
+            funtion.temp.y = 0;
+            funtion.temp1.x = 0;
+            funtion.temp1.y = 0;
+            
         }
 
         public override void Enter()
@@ -38,7 +43,7 @@
                 { false,  true, false, false, false, false,  true, false, false, false,  true, false},
                 { false,  true, false, false, false, false,  true, false, false, false,  true, false},
                 { false,  true,  true,  true, true,   true,  true,  true,  true, false,  true, false},
-                { false,  true, false, false, false,  true,  true,  true,  true, false,  true, false},
+                { false,  true, false, false, false,  true,  true,  true,  true, true,  true, false},
                 { false,  true, false,  true, false,  true,  true, false, false, false, false, false},
                 { false,  true, false,  true,  true,  true,  true, false, false, false, false, false},
                 { false,  true, false,  true,  true,  true,  true,  true,  true,  true, false, false},
@@ -57,6 +62,10 @@
             funtion.PrintFake(6, 4);
             funtion.PrintFake(6, 3);
             player.PrintPlayer(player.pos.x, player.pos.y);
+            funtion.PrintTemp(10, 10);
+            funtion.PrintTemp1(10, 6);
+            funtion.PrintBlink();
+
         }
 
         public override void Input()
@@ -88,6 +97,7 @@
         {
             player.Move(map);
             CheckGameClear();
+            game.End();
         }
 
         public override void Exit()
@@ -98,12 +108,13 @@
         public void CheckGameClear()
         {
 
-            //if (player1.pos.x == goal.x && player1.pos.y == goal.y)
-            //{
-            //    Console.Clear();
-            //    //game.ChangeMap(MapType.Level2);
-            //    game.End();
-            //}
+            if (player.pos.x == funtion.goal.x && player.pos.y == funtion.goal.y)
+            {
+                Console.Clear();
+                //game.changemap(maptype.level2);
+                
+            }
+            return;
 
         }
 
