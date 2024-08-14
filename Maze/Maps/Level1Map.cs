@@ -3,7 +3,7 @@
     public class Level1Map : Map
     {
         Funtion funtion = new Funtion();
-        Player player1 = new Player();
+        Player player = new Player();
 
 
         public int x;
@@ -13,18 +13,11 @@
         private bool[,] map;
         public ConsoleKey inputKey;
 
-        public struct Point()
-        {
-            public int x;
-            public int y;
-        }
-
-        public Point player;
-        public Point goal;
-        
-
         public Level1Map(Game game) : base(game)
         {
+            player.pos.x = 1;
+            player.pos.y = 1;
+            player.map = map;
         }
 
         public override void Enter()
@@ -63,12 +56,12 @@
             funtion.PrintWall(7, 1);
             funtion.PrintFake(6, 4);
             funtion.PrintFake(6, 3);
-            player1.PrintPlayer(1, 1);
+            player.PrintPlayer(player.pos.x, player.pos.y);
         }
 
         public override void Input()
         {
-            inputKey = Console.ReadKey(true).Key;
+            player.Control();
         }
 
         public void PrintMap()
@@ -93,7 +86,7 @@
 
         public override void Update()
         {
-            Move();
+            player.Move(map);
             CheckGameClear();
         }
 
@@ -101,83 +94,16 @@
         {
         }
 
-        public void Move()
-        {
-            switch (inputKey)
-            {
-                case ConsoleKey.W:
-                case ConsoleKey.UpArrow:
-                    MoveUp();
-                    break;
-
-                case ConsoleKey.S:
-                case ConsoleKey.DownArrow:
-                    MoveDown();
-                    break;
-
-                case ConsoleKey.A:
-                case ConsoleKey.LeftArrow:
-                    MoveLeft();
-                    break;
-
-                case ConsoleKey.D:
-                case ConsoleKey.RightArrow:
-                    MoveRight();
-                    break;
-
-            }
-        }
-
-
-
-        public void MoveUp()
-        {
-            player.x = player1.pos.x;
-            player.y = player1.pos.y;
-            Point next = new Point() { x = player.x, y = player.y - 1 };
-            if (map[next.y, next.x])
-            {
-                player = next;
-            }
-        }
-        public void MoveDown()
-        {
-            player.x = player1.pos.x;
-            player.y = player1.pos.y;
-            Point next = new Point() { x = player.x, y = player.y + 1 };
-            if (map[next.y, next.x])
-            {
-                player = next;
-            }
-        }
-
-        public void MoveLeft()
-        {
-            Point next = new Point() { x = player.x - 1, y = player.y };
-            if (map[next.y, next.x])
-            {
-                player = next;
-            }
-        }
-
-        public void MoveRight()
-        {
-            Point next = new Point() { x = player.x + 1, y = player.y };
-            if (map[next.y, next.x])
-            {
-                player = next;
-            }
-        }
-
+       
         public void CheckGameClear()
         {
 
-            if (player.x == goal.x && player.y == goal.y)
-            {
-                Console.Clear();
-                //game.ChangeMap(MapType.Level2);
-                game.End();
-            }
+            //if (player1.pos.x == goal.x && player1.pos.y == goal.y)
+            //{
+            //    Console.Clear();
+            //    //game.ChangeMap(MapType.Level2);
+            //    game.End();
+            //}
 
         }
 
