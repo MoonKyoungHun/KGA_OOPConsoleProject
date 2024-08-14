@@ -18,11 +18,8 @@
             player.pos.x = 1;
             player.pos.y = 1;
             player.map = map;
-            funtion.temp.x = 0;
-            funtion.temp.y = 0;
-            funtion.temp1.x = 0;
-            funtion.temp1.y = 0;
-            
+            funtion.goal.x = 0;
+            funtion.goal.y = 0;
         }
 
         public override void Enter()
@@ -102,6 +99,7 @@
 
         public override void Exit()
         {
+            CheckGameClear();
         }
 
        
@@ -114,7 +112,7 @@
                 //game.changemap(maptype.level2);
                 
             }
-            return;
+            
 
         }
 
