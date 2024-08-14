@@ -44,8 +44,10 @@ namespace Maze
             Console.ResetColor();
         }
 
-        public void Move(bool[,] bools)
+        public void Move(bool[,] map)
         {
+            this.map = map;
+
             switch (inputKey)
             {
                 case ConsoleKey.W:
@@ -75,44 +77,36 @@ namespace Maze
         
         public void MoveUp()
         {
-
             Point next = new Point() { x = pos.x, y = pos.y - 1 };
             if (map[next.y, next.x])
             {
-                pos.x = next.x;
-                pos.y = next.y;
+                pos = next;
             }
         }
         public void MoveDown()
         {
-
             Point next = new Point() { x = pos.x, y = pos.y + 1 };
             if (map[next.y, next.x])
             {
-                pos.x = next.x;
-                pos.y = next.y;
+                pos= next;
             }
         }
 
         public void MoveLeft()
         {
-
             Point next = new Point() { x = pos.x - 1, y = pos.y };
             if (map[next.y, next.x])
             {
-                pos.x = next.x;
-                pos.y = next.y;
+                pos = next;
             }
         }
 
         public void MoveRight()
         {
-
             Point next = new Point() { x = pos.x + 1, y = pos.y };
             if (map[next.y, next.x])
             {
-                pos.x = next.x;
-                pos.y = next.y;
+                pos = next;
             }
         }
     }
