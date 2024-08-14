@@ -21,6 +21,7 @@
 
         public Point player;
         public Point goal;
+        
 
         public Level1Map(Game game) : base(game)
         {
@@ -131,41 +132,40 @@
 
         public void MoveUp()
         {
-            Point next = new Point() { x = player1.x, y = player1.y - 1 };
-
+            player.x = player1.pos.x;
+            player.y = player1.pos.y;
+            Point next = new Point() { x = player.x, y = player.y - 1 };
             if (map[next.y, next.x])
             {
-                player1.x = next.x;
-                player1.y = next.y;
+                player = next;
             }
         }
         public void MoveDown()
         {
-            Point next = new Point() { x = player1.x, y = player1.y + 1 };
+            player.x = player1.pos.x;
+            player.y = player1.pos.y;
+            Point next = new Point() { x = player.x, y = player.y + 1 };
             if (map[next.y, next.x])
             {
-                player1.x = next.x;
-                player1.y = next.y;
+                player = next;
             }
         }
 
         public void MoveLeft()
         {
-            Point next = new Point() { x = player1.x - 1, y = player1.y };
+            Point next = new Point() { x = player.x - 1, y = player.y };
             if (map[next.y, next.x])
             {
-                player1.x = next.x;
-                player1.y = next.y;
+                player = next;
             }
         }
 
         public void MoveRight()
         {
-            Point next = new Point() { x = player1.x + 1, y = player1.y };
+            Point next = new Point() { x = player.x + 1, y = player.y };
             if (map[next.y, next.x])
             {
-                player1.x = next.x;
-                player1.y = next.y;
+                player = next;
             }
         }
 

@@ -2,13 +2,18 @@
 {
     public class Player
     {
+        public struct Point()
+        {
+            public int x;
+            public int y;
+        }
 
-        public int x;
-        public int y;
+        public Point pos;
 
         private int hp = 5;
         public int HP { get { return hp; } }
 
+        
         public void ShowInfo()
         {
             Console.WriteLine("==========================================");
@@ -20,11 +25,11 @@
 
         public void PrintPlayer(int x, int y)
         {
-            this.x = x;
-            this.y = y;
+            pos.x = x;
+            pos.y = y;
 
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.SetCursorPosition(x, y);
+            Console.SetCursorPosition(pos.x, pos.y);
             Console.WriteLine("P");
             Console.ResetColor();
         }
