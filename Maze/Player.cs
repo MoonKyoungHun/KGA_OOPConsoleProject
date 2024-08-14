@@ -1,14 +1,10 @@
-﻿using System.Drawing;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Xml.Linq;
-
-namespace Maze
+﻿namespace Maze
 {
     public class Player
     {
-        private int x;
-        private int y;
+
+        public int x;
+        public int y;
 
         private int hp = 5;
         public int HP { get { return hp; } }
@@ -24,6 +20,9 @@ namespace Maze
 
         public void PrintPlayer(int x, int y)
         {
+            this.x = x;
+            this.y = y;
+
             Console.ForegroundColor = ConsoleColor.Red;
             Console.SetCursorPosition(x, y);
             Console.WriteLine("P");

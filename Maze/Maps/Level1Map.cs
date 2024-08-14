@@ -1,19 +1,14 @@
-﻿using System.Drawing;
-using System.Numerics;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-
-namespace Maze.Maps
+﻿namespace Maze.Maps
 {
     public class Level1Map : Map
     {
         Funtion funtion = new Funtion();
         Player player1 = new Player();
 
-        private int x;
-        private int y;
 
-        private bool a;
-        private bool b;
+        public int x;
+        public int y;
+
 
         private bool[,] map;
         public ConsoleKey inputKey;
@@ -56,7 +51,6 @@ namespace Maze.Maps
                 { false,  true, false,  true,  true,  true,  true,  true,  true,  true,  true, false},
                 { false, false, false, false, false, false, false, false, false, false, false, false},
             };
-           
         }
 
         public override void Render()
@@ -133,58 +127,58 @@ namespace Maze.Maps
             }
         }
 
-        
+
 
         public void MoveUp()
         {
-            player1.PrintPlayer(player.x, player.y);
+            Point next = new Point() { x = player1.x, y = player1.y - 1 };
 
-            Point next = new Point() { x = player.x, y = player.y -1 };
+            if (map[next.y, next.x])
             {
-                if (map[next.y, next.x])
-                {
-                    player1 = next;
-                }
+                player1.x = next.x;
+                player1.y = next.y;
             }
         }
         public void MoveDown()
         {
-            Point next = new Point() { x = player.x, y = player.y + 1 };
+            Point next = new Point() { x = player1.x, y = player1.y + 1 };
             if (map[next.y, next.x])
             {
-                player = next;
+                player1.x = next.x;
+                player1.y = next.y;
             }
         }
 
         public void MoveLeft()
         {
-            Point next = new Point() { x = player.x - 1, y = player.y };
+            Point next = new Point() { x = player1.x - 1, y = player1.y };
             if (map[next.y, next.x])
             {
-                player = next;
+                player1.x = next.x;
+                player1.y = next.y;
             }
         }
 
         public void MoveRight()
         {
-            Point next = new Point() { x = player.x + 1, y = player.y };
+            Point next = new Point() { x = player1.x + 1, y = player1.y };
             if (map[next.y, next.x])
             {
-                player = next;
+                player1.x = next.x;
+                player1.y = next.y;
             }
         }
 
         public void CheckGameClear()
         {
-            player1.PrintPlayer(player.x, player.y);
-            funtion.PrintGoal(goal.x, goal.y);
+
             if (player.x == goal.x && player.y == goal.y)
             {
                 Console.Clear();
                 //game.ChangeMap(MapType.Level2);
                 game.End();
             }
-           
+
         }
 
     }
