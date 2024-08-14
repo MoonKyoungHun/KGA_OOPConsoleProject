@@ -1,19 +1,24 @@
-﻿namespace Maze
+﻿using Maze.Maps;
+
+namespace Maze
 {
     public class Player
     {
+        public bool[,] map;
+        private ConsoleKey inputKey;
+        public Point pos;
+
         public struct Point()
         {
             public int x;
             public int y;
         }
 
-        public Point pos;
 
         private int hp = 5;
         public int HP { get { return hp; } }
 
-        
+
         public void ShowInfo()
         {
             Console.WriteLine("==========================================");
@@ -21,6 +26,11 @@
             Console.WriteLine("==========================================");
             Console.WriteLine();
             Console.SetCursorPosition(0, 5);
+        }
+
+        public void Control()
+        {
+            inputKey = Console.ReadKey(true).Key;
         }
 
         public void PrintPlayer(int x, int y)
@@ -34,6 +44,76 @@
             Console.ResetColor();
         }
 
+        public void Move(bool[,] bools)
+        {
+            switch (inputKey)
+            {
+                case ConsoleKey.W:
+                case ConsoleKey.UpArrow:
+                    MoveUp();
+                    break;
 
+                case ConsoleKey.S:
+                case ConsoleKey.DownArrow:
+                    MoveDown();
+                    break;
+
+                case ConsoleKey.A:
+                case ConsoleKey.LeftArrow:
+                    MoveLeft();
+                    break;
+
+                case ConsoleKey.D:
+                case ConsoleKey.RightArrow:
+                    MoveRight();
+                    break;
+
+            }
+        }
+
+
+        
+        public void MoveUp()
+        {
+
+            Point next = new Point() { x = pos.x, y = pos.y - 1 };
+            if (map[next.y, next.x])
+            {
+                pos.x = next.x;
+                pos.y = next.y;
+            }
+        }
+        public void MoveDown()
+        {
+
+            Point next = new Point() { x = pos.x, y = pos.y + 1 };
+            if (map[next.y, next.x])
+            {
+                pos.x = next.x;
+                pos.y = next.y;
+            }
+        }
+
+        public void MoveLeft()
+        {
+
+            Point next = new Point() { x = pos.x - 1, y = pos.y };
+            if (map[next.y, next.x])
+            {
+                pos.x = next.x;
+                pos.y = next.y;
+            }
+        }
+
+        public void MoveRight()
+        {
+
+            Point next = new Point() { x = pos.x + 1, y = pos.y };
+            if (map[next.y, next.x])
+            {
+                pos.x = next.x;
+                pos.y = next.y;
+            }
+        }
     }
 }
