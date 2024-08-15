@@ -1,4 +1,6 @@
 ﻿using Maze.Maps;
+using System.Numerics;
+using System.Xml.Linq;
 
 namespace Maze
 {
@@ -14,18 +16,20 @@ namespace Maze
             public int y;
         }
 
-
-        private int hp = 5;
+        public int hp = 5;
         public int HP { get { return hp; } }
 
 
-        public void ShowInfo()
+        public void ShowInfo(int x)
         {
+            Console.SetCursorPosition(0, 16);
+            Console.WriteLine($"===============level {x}==================");
+            Console.WriteLine();
             Console.WriteLine("==========================================");
             Console.WriteLine($"생명 게이지 : {hp}");
             Console.WriteLine("==========================================");
             Console.WriteLine();
-            Console.SetCursorPosition(0, 5);
+            Console.SetCursorPosition(0, 0);
         }
 
         public void Control()
