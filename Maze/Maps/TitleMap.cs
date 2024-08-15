@@ -22,11 +22,6 @@ namespace Maze.Maps
         { 
         }
 
-        public override void Input()
-        {
-            Console.ReadKey();
-        }
-
         public override void Render()
         {
             Console.Clear();
@@ -38,7 +33,12 @@ namespace Maze.Maps
             Console.WriteLine();
             Console.WriteLine("아무 키 하나 눌러주세요.");
         }
-        
+
+        public override void Input()
+        {
+            Console.ReadKey();
+        }
+
         public override void Update()
         {
             game.ChangeMap(MapType.Level1);
