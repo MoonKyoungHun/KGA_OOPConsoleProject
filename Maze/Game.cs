@@ -5,8 +5,9 @@ namespace Maze
 {
     public class Game
     {
-        private bool isRunning;
+        Player player = new Player();
 
+        private bool isRunning;
         private Map[] map;
         private Map curMap;
         public Map CurMap {  get { return curMap; } }
@@ -20,17 +21,21 @@ namespace Maze
                 Input();
                 Update();
             }
+            End();
+
+            
         }
 
         private void Start()
         {
+
             isRunning = true;
 
             map = new Map[(int)MapType.Size];
             map[(int)MapType.Title] = new TitleMap(this);
             map[(int)MapType.Level1] = new Level1Map(this);
-            //map[(int)MapType.Level2] = new Level2Map(this);
-            //map[(int)MapType.Level3] = new Level3Map(this);
+            map[(int)MapType.Level2] = new Level2Map(this);
+            map[(int)MapType.Level3] = new Level3Map(this);
 
             curMap = map[(int)MapType.Title];
             curMap.Enter();
@@ -47,15 +52,9 @@ namespace Maze
 
 
 
-        public void End()
+        private void End()
         {
-            Console.Clear();
-
-            Console.WriteLine(" ==========================");
-            Console.WriteLine("||                        ||");
-            Console.WriteLine("||     탈출     성공!     ||");
-            Console.WriteLine("||                        ||");
-            Console.WriteLine(" ==========================");
+            curMap.Exit();
         }
 
         private void Render()
@@ -71,6 +70,19 @@ namespace Maze
         private void Update()
         {
             curMap.Update();
+        }
+
+        public void Exit()
+        {
+            isRunning = false;
+
+            Console.Clear();
+
+            Console.WriteLine(" ==========================");
+            Console.WriteLine("||                        ||");
+            Console.WriteLine("||     탈출     성공!     ||");
+            Console.WriteLine("||                        ||");
+            Console.WriteLine(" ==========================");
         }
     }
 }
