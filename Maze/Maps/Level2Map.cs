@@ -2,45 +2,85 @@
 
 namespace Maze.Maps
 {
-    /*
     public class Level2Map : Map
     {
+        Funtion funtion = new Funtion();
+        Player player = new Player();
+
+        public int x;
+        public int y;
+
         private bool[,] map;
         public ConsoleKey inputKey;
-        private Point goal;
-        private Point player;
-
-        public struct Point()
-        {
-            public int x;
-            public int y;
-        }
 
         public Level2Map(Game game) : base(game)
         {
+            player.pos.x = 1;
+            player.pos.y = 1;
         }
 
         public override void Enter()
         {
-            Console.Clear();
-            Console.WriteLine("=============Level2=============");
-            Console.WriteLine();
-            Console.WriteLine();
-            
+            Console.CursorVisible = false;
+
+            map = new bool[,]
+            {
+                
+                { false, false, false, false, false, false, false, false, false, false, false, false},
+                { false,  true, false, false, false,  true,  true, false,  true,  true,  true, false},
+                { false,  true, false, false, false,  true,  true, false,  true,  true,  true, false},
+                { false,  true, false, false, false, false,  true, false, false, false,  true, false},
+                { false,  true, false, false, false, false,  true, false, false, false,  true, false},
+                { false,  true,  true,  true, true,   true,  true,  true,  true, false,  true, false},
+                { false,  true, false, false, false,  true,  true,  true,  true, true,  true, false},
+                { false,  true, false,  true, false,  true,  true, false, false, false, false, false},
+                { false,  true, false,  true,  true,  true,  true, false, false, false, false, false},
+                { false,  true, false,  true,  true,  true,  true,  true,  true,  true, false, false},
+                { false,  true, false,  true,  true,  true,  true,  true,  true,  true,  true, false},
+                { false, false, false, false, false, false, false, false, false, false, false, false},
+            };
 
         }
 
         public override void Render()
         {
+            player.ShowInfo(2);
+            PrintMap();
+            funtion.PrintGoal(8, 1);
+            funtion.PrintWall(7, 1);
+            funtion.PrintFake(6, 4);
+            funtion.PrintFake(6, 3);
+            player.PrintPlayer(player.pos.x, player.pos.y);
+            funtion.PrintTemp(10, 10);
+            funtion.PrintTrap(10, 6);
+            
         }
 
-        static void PrintMap()
+        public override void Input()
         {
+            player.Control();
+        }
+
+        public override void Update()
+        {
+            player.Move(map);
+            Trap();
+            CheckGameClear();
+            
+        }
+
+        public override void Exit()
+        {
+        }
+
+        public void PrintMap()
+        {
+
             for (int y = 0; y < map.GetLength(0); y++)
             {
                 for (int x = 0; x < map.GetLength(1); x++)
                 {
-                    if (wall.x == x && wall.y == y)
+                    if (funtion.wall.x == x && funtion.wall.y == y)
                     {
                         Console.Write(" ");
                     }
@@ -52,35 +92,33 @@ namespace Maze.Maps
                     {
                         Console.Write("#");
                     }
-
                 }
                 Console.WriteLine();
             }
+
         }
 
-        static void PrintGoal()
-        {
-            Console.SetCursorPosition(x,y);
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("G");
-            Console.ResetColor();
-        }
-
-        public override void Input()
-        {
-            
-        }
-
-        public override void Update()
+        public void CheckGameClear()
         {
 
+            if (player.pos.x == funtion.goal.x && player.pos.y == funtion.goal.y)
+            {
+                Console.Clear();
+                game.ChangeMap(MapType.Level3);
+            }
         }
 
-        public override void Exit()
+        public void Trap()
         {
-            game.ChangeMap(MapType.Level1);
+            if (funtion.trap.x == player.pos.x && funtion.trap.y == player.pos.y)
+            {
+                if(player.HP == 1)
+                {
+                    game.ChangeMap(MapType.Title);
+                }
+                player.hp--;
+
+            }
         }
-    
     }
-    */
 }
